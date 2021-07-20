@@ -1,3 +1,9 @@
 dataset/
 Output/
 .ipynb_checkpoints/
+backup/
+data_files/
+models/
+Processed_Data/
+RAFT/
+data.zip

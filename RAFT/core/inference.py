@@ -78,7 +78,7 @@ def inference(args):
     # change model's mode to evaluation
     model.eval()
 
-    size = (250,250)
+    size = (200,200)
     video_path = args.videoframepath
     frame_list = os.listdir(video_path)
     frame_list.sort()
@@ -92,12 +92,14 @@ def inference(args):
     
 
     # generating outputpath
-    ls = video_path.split('/')[:-1]
-    ls.append('flow')
-    outputPath = '/'
-    outputPath = outputPath.join(ls)
-    
+    # ls = video_path.split('/')[:-1]
+    # ls.append('flow')
+    # outputPath = '/'
+    #outputPath = outputPath.join(ls)
 
+    file_name = video_path.split('/')[-2]
+    os.mkdir('./output/'+file_name)
+    outputPath = os.path.join(os.getcwd()+'/output/'+file_name)    
 
     # capture the video and get the first frame
     # cap = cv2.VideoCapture(video_path)
@@ -119,14 +121,16 @@ def inference(args):
     count = 0
     #############
     index = 1
-    counter = 0
+    #counter = 0
     with torch.no_grad():
         while True:
             # read the next frame
-            frame_2 = cv2.imread(frame_path_list[index])
-            index+=1
             if(index >= len(frame_path_list)):
                 break
+
+            frame_2 = cv2.imread(frame_path_list[index])
+            index+=1
+            
             # if not ret:
             #     break
             # preprocessing
@@ -159,7 +163,7 @@ def inference(args):
             # if not ret:
             #     break
             frame_1 = frame_2
-            counter += 1
+    #        counter += 1
 
     #out.release()
 
